@@ -18,7 +18,7 @@ export default function PostForm({ post }) {
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
-
+  console.log("Ye Hai user Data create honey se pehle ka: ", userData);
   const submit = async (data) => {
     if (post) {
       const file = data.image[0]
@@ -38,16 +38,34 @@ export default function PostForm({ post }) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
-        //aur check krna 
       const file = await appwriteService.uploadFile(data.image[0]);
 
+      console.log("UserData just above the createPost: ", userData);
+      console.log("UserId just above wali: ", userData.$id);
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId;
-        const dbPost = await appwriteService.createPost({
-          ...data,
-          userId: userData.$id,//since user data ni hoga
-        });
+        console.log("UserId inside if block: ", userData.$id);
+
+        const { title, slug, content, featuredImage, status } = data;
+
+        // Get user ID from userData
+        const userid = userData.$id;
+        
+        // Create an object with individual properties
+        const postData = {
+            title,
+            slug,
+            content,
+            featuredImage,
+            status,
+            userid, // Ensure the property name matches the function parameter in config.js
+        };
+        console.log("Post DATA: ", postData);
+        
+        // Call createPost with the individual properties
+        const dbPost = await appwriteService.createPost(postData);
+        
 
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
@@ -138,7 +156,3 @@ export default function PostForm({ post }) {
     </form>
   );
 }
-
-
-
-
