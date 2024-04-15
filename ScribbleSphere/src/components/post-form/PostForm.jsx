@@ -51,21 +51,20 @@ export default function PostForm({ post }) {
 
         // Get user ID from userData
         const userid = userData.$id;
-        
+
         // Create an object with individual properties
         const postData = {
-            title,
-            slug,
-            content,
-            featuredImage,
-            status,
-            userid, // Ensure the property name matches the function parameter in config.js
+          title,
+          slug,
+          content,
+          featuredImage,
+          status,
+          userid, // Ensure the property name matches the function parameter in config.js
         };
         console.log("Post DATA: ", postData);
-        
+
         // Call createPost with the individual properties
         const dbPost = await appwriteService.createPost(postData);
-        
 
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
@@ -96,40 +95,53 @@ export default function PostForm({ post }) {
   }, [watch, slugTransform, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-      <div className="w-2/3 px-2">
-        <Input
-          label="Title :"
-          placeholder="Title"
-          className="mb-4"
-          {...register("title", { required: true })}
-        />
-        <Input
-          label="Slug :"
-          placeholder="Slug"
-          className="mb-4"
-          {...register("slug", { required: true })}
-          onInput={(e) => {
-            setValue("slug", slugTransform(e.currentTarget.value), {
-              shouldValidate: true,
-            });
-          }}
-        />
-        <RTE
-          label="Content :"
-          name="content"
-          control={control}
-          defaultValue={getValues("content")}
-        />
+    <form
+      onSubmit={handleSubmit(submit)}
+      className="flex flex-wrap text-[#fff]"
+    >
+      <div className="w-2/3 px-4">
+        <div className="mb-16">
+          <Input
+            label="Title :"
+            className="mb-4"
+            style={{ padding: '30px' }}
+            {...register("title", { required: true })}
+          />
+        </div>
+        <div className="mb-16">
+          <Input
+            label="Slug :"
+            className="mb-4"
+            {...register("slug", { required: true })}
+            onInput={(e) => {
+              setValue("slug", slugTransform(e.currentTarget.value), {
+                shouldValidate: true,
+              });
+            }}
+            style={{ padding: '30px' }}
+          />
+        </div>
+        <div className="mt-8">
+          <RTE
+            label="Content :"
+            name="content"
+            control={control}
+            defaultValue={getValues("content")}
+          />
+        </div>
       </div>
-      <div className="w-1/3 px-2">
-        <Input
-          label="Featured Image :"
-          type="file"
-          className="mb-4"
-          accept="image/png, image/jpg, image/jpeg, image/gif"
-          {...register("image", { required: !post })}
-        />
+      <div className="w-1/3 px-4">
+        <div className="mb-4">
+          <Input
+            label="Featured Image :"
+            type="file"
+            className="mb-4"
+            accept="image/png, image/jpg, image/jpeg, image/gif image/PNG"
+            style={{ padding: '16px' }}
+            {...register("image", { required: !post })}
+          />
+        </div>
+        <div className="">
         {post && (
           <div className="w-full mb-4">
             <img
@@ -139,19 +151,23 @@ export default function PostForm({ post }) {
             />
           </div>
         )}
-        <Select
+        </div>
+       <div className="mt-8">
+       <Select
           options={["active", "inactive"]}
           label="Status"
           className="mb-4"
           {...register("status", { required: true })}
         />
-        <Button
+       </div>
+      <div className="mt-4">
+      <Button
           type="submit"
-          bgColor={post ? "bg-green-500" : undefined}
-          className="w-full"
+          className="w-full mb-11"
         >
           {post ? "Update" : "Submit"}
         </Button>
+      </div>
       </div>
     </form>
   );

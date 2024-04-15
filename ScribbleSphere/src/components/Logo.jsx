@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-function Logo({width = '100px'}) {
-  return (
-    <div>Logo</div>
-  )
+import logoImage from '../assets/Loggoo.png'; 
+
+function Logo( {width}  ) {
+    return (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img src={logoImage} alt="ScribbleSphere Logo" style={{ width }} />
+        </div>
+    );
 }
 
-export default Logo
+export default Logo;

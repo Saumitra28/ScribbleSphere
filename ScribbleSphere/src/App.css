@@ -1,9 +1,12 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
+} */
+/* #root {
+  background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6%);
+} */
 
 .logo {
   height: 6em;
@@ -38,5 +41,5 @@
 }
 
 .read-the-docs {
-  color: #888;
+  color: #212121;
 }

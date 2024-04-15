@@ -1,0 +1,68 @@
+/* Add animations for the Banner component */
+@keyframes slide {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  /* Apply the animation to the sections */
+  .inner .wrapper section {
+    display: flex;
+    animation: slide var(--speed) linear infinite;
+  }
+  
+  .inner .wrapper {
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* CSS for the Banner component */
+
+.banner-inner {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .banner-wrapper {
+    display: flex;
+    width: 200%; /* Allow for smooth looping */
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+  
+  section {
+    display: flex;
+    width: 70%; /* Each section takes full width */
+    height: 60%; /* Each section takes full height */
+    animation: scrollBanner var(--speed) linear infinite;
+  }
+  
+  @keyframes scrollBanner {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-66.67%); /* Slide the banner smoothly */
+    }
+  }
+  
+  .banner-image {
+    width: 33.33%; /* Each image takes a third of the wrapper width */
+    height: 100%;
+  }
+  
+  .banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the images cover the full area */
+  }
+  
+  
