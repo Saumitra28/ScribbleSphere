@@ -36,15 +36,17 @@ export default function Post() {
         <div className="py-8 text-[#fff]">
             <Container>
                 <div className="w-full flex flex-col lg:flex-row gap-4 mb-4 relative border rounded-xl p-4 bg-gray-800">
-                    <div className="flex-shrink-0 lg:w-1/2">
-                        <img
+                    <div className="flex-shrink-0 lg:w-1/2 ">
+                      <div className="max-w-96 max-h-96 rounded-lg mx-auto">
+                      <img
                             src={appwriteService.getFilePreview(post.featuredImage)}
                             alt={post.title}
-                            className="rounded-xl w-full h-auto object-cover"
+                            className="rounded-xl w-full max-h-[28rem] object-full"
                         />
+                      </div>
                     </div>
 
-                    <div className="lg:w-1/2 flex flex-col justify-between">
+                    <div className="lg:w-1/2 flex flex-col justify-evenly">
                         <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
 
                         <div
